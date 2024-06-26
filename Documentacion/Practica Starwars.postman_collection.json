@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "c09cc270-edaf-4de4-8e26-12df80bde9be",
+		"name": "Practica Starwars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36526715"
+	},
+	"item": [
+		{
+			"name": "test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://swapi.dev/api/people",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"dev"
+					],
+					"path": [
+						"api",
+						"people"
+					],
+					"query": [
+						{
+							"key": "gender",
+							"value": "female",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "people",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "client_id",
+						"value": "",
+						"type": "text"
+					},
+					{
+						"key": "client_secret",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/api/people?gender=",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"people"
+					],
+					"query": [
+						{
+							"key": "gender",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

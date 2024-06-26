@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 			<ee:message >
 			</ee:message>
 			<ee:variables >
-				<ee:set-variable variableName="gender" ><![CDATA[attributes.queryParams.gender default ""]]></ee:set-variable>
+				<ee:set-variable resource="dwl/set-queryParam-gender.dwl" variableName="gender" />
 			</ee:variables>
 		</ee:transform>
 	</flow>
