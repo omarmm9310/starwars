@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="b39e7d4f-fbb4-4def-b4bd-634ab18f226d" file="properties\\${mule.env}-properties.yaml" key="${mule.key}" />
+	<global-property doc:name="Global Property" doc:id="23bae3f4-bfcf-4ebd-b008-67103f3d9c79" name="mule.key" value="ABCDE123456789" />
+	<global-property doc:name="Global Property" doc:id="65fea4e5-eacb-4bbf-a1e6-f95fac6b1146" name="mule.env" value="local" />
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ee06593e-4560-492a-8819-459788085ad3" >
+		<http:listener-connection host="0.0.0.0" port="${secure::http.port}" />
+	</http:listener-config>
+	<api-gateway:autodiscovery apiId="${secure::api.instancia}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="a5f785b0-3dc6-4ae0-b638-94972a2fd8d5" flowRef="starwars-people-exp-api-main" />
+	<http:request-config name="starwars-people-sys-api" doc:name="HTTP Request configuration" doc:id="ba2ba16c-99ac-452e-9765-657f3278d2d6" basePath="${secure::people.basePath}" >
+		<http:request-connection host="${secure::people.host}" port="${secure::people.port}" connectionIdleTimeout="300000"/>
+	</http:request-config>
+</mule>

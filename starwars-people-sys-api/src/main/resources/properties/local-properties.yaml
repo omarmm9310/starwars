@@ -1,0 +1,14 @@
+api:
+  instancia: "19652431"
+  
+http:
+  port: "8082"
+https:
+  port: "8092"
+  
+swapi:
+  host: "swapi.dev"
+  port: ""
+  basePath: "/api"
+  path: "/people"
+  

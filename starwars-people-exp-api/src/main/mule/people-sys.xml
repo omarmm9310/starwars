@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="people-sysFlow" doc:id="775ad65e-2afd-4a5e-a3a2-e0dd38da53af" >
+		<logger level="INFO" doc:name="Logger" doc:id="a674240d-acc3-40e8-8cf6-2d0ca04c1c3f" message="Send Requests"/>
+		<flow-ref doc:name="set-queryParam-gender" doc:id="e64abfb9-aa0a-4b42-a65d-937ce6d53c70" name="set-queryParam-gender"/>
+		<http:request method="GET" doc:name="Request" doc:id="9187520a-4067-4f21-915d-c4289bbbccc2" config-ref="starwars-people-sys-api" path="${secure::people.path}">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"client_secret" : Mule::p('secure::people.client_secret'),
+	"client_id" : Mule::p('secure::people.client_id')
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"gender" : vars.gender
+}]]]></http:query-params>
+		</http:request>
+	</flow>
+</mule>

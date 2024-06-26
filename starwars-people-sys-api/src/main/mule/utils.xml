@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	
+	<flow name="set-queryParam-gender" doc:id="c42feecf-6c68-423d-839f-ebca0d15c1f7" >
+		<ee:transform doc:name="Transform Message" doc:id="adeb084e-5683-4856-ae66-629e8a9e9c33" >
+			<ee:message >
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="gender" ><![CDATA[attributes.queryParams.gender]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+	</flow>
+	<flow name="get-data-starwars" doc:id="564e14d9-903c-46d2-8741-f4d1cb99bb46" >
+		<http:request method="GET" doc:name="Request" doc:id="b0f3ad23-2323-4d02-8642-49557560aef1" config-ref="HTTP_Request_configuration" path="${secure::swapi.path}"/>
+	</flow>
+</mule>

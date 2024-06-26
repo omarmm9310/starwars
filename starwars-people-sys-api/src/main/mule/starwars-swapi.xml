@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="starwars-swapiFlow" doc:id="55e2bde2-6e8f-452f-aa18-823b2319ec75" >
+		<logger level="INFO" doc:name="Logger" doc:id="fbd07a62-8cef-4c10-9a51-e833d25f27cf" message="Iniciar"/>
+		<flow-ref doc:name="set-queryParam-gender" doc:id="2ff1b62f-eac4-4453-8285-1c4a36ab85a2" name="set-queryParam-gender"/>
+		<flow-ref doc:name="get-data-starwars" doc:id="1c38ad41-e0be-4dd0-aaa7-5956e099cde6" name="get-data-starwars"/>
+		<flow-ref doc:name="validate-queryParam" doc:id="68baa41c-fe3c-4e51-b596-910fd11df7e5" name="validate-queryParam"/>
+		<flow-ref doc:name="filter-data" doc:id="25d8cb85-cdff-48e8-a2a5-ead7c04a74e2" name="filter-data"/>
+	</flow>
+	<flow name="validate-queryParam" doc:id="2e7e8d7c-bba7-406b-b648-4d18140fd10b" >
+		<choice doc:name="Choice" doc:id="2d97a3fe-06cd-42de-9560-89849017c705" >
+			<when expression='vars.gender != ""'>
+				<ee:transform doc:name="Transform Message" doc:id="9cc85919-054d-4770-9c7d-001594bda959" >
+					<ee:message >
+						<ee:set-payload resource="dwl/filter-attributes-people-gender.dwl" />
+					</ee:message>
+				</ee:transform>
+			</when>
+		</choice>
+	</flow>
+	<flow name="filter-data" doc:id="c8a43bf9-6978-42e7-8789-dca59d2985a2" >
+		<ee:transform doc:name="Transform Message" doc:id="93a61b9d-c626-42c6-8ecd-5662260796d1" >
+			<ee:message >
+				<ee:set-payload resource="dwl/filter-attributes-people.dwl" />
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

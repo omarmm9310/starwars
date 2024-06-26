@@ -1,0 +1,15 @@
+api:
+  instancia: "19652428"
+  
+http:
+  port: "8081"
+https:
+  port: "8092"
+  
+people:
+  host: "localhost"
+  port: "8082"
+  basePath: "/api"
+  path: "/people"
+  client_id: "d07e02e8d861433cb5c0d2d05d6f3944"
+  client_secret: "![FpS5ItSn5ML+rvjsgpSLEvHmF4ft3fXBO7glRh7yBrrQi6m3PTikf5UNvm9LGcgE]"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<http:listener-config name="starwars-people-exp-api-httpListenerConfig" doc:name="HTTP Listener config" doc:id="5b7d41b1-a39b-41e2-b0ff-0d1dd2e609bf" >
+		<http:listener-connection host="0.0.0.0" port="${secure::http.port}" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="b6a19b70-7054-4442-b567-c35cf279eb6e" basePath="${secure::swapi.basePath}" >
+		<http:request-connection host="${secure::swapi.host}" />
+	</http:request-config>
+	<api-gateway:autodiscovery apiId="${secure::api.instancia}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="ea378e30-63f8-448c-bb13-c8d4a0da7128" flowRef="starwars-people-exp-api-main" />
+	<global-property doc:name="Global Property" doc:id="1e0493f2-40cd-40e0-bf6f-a61c96b9617b" name="mule.env" value="local" />
+	<global-property doc:name="Global Property" doc:id="e705d056-97d7-42b8-81d4-6084a728ab5e" name="mule.key" value="ABCDE987654321" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="f498ead2-76e8-4b7f-ac35-aae6952b746c" file="properties\\${mule.env}-properties.yaml" key="${mule.key}" />
+</mule>
