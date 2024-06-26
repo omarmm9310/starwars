@@ -11,4 +11,3 @@ En este repositorio podra encontrar la documentación y los recursos que se cont
 ## Contenido ubicado en la raiz del repositorio.
 - Proyectos Mulesoft: starwars-people-exp-api y starwars-people-sys-api
 
-## Instalación
